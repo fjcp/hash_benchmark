@@ -1,11 +1,9 @@
-#include <limits>
 #define CATCH_CONFIG_MAIN
 #define CATCH_CONFIG_ENABLE_BENCHMARKING
 #include <algorithm>
-#include <boost/container_hash/hash.hpp>
 #include <string>
-#include <unordered_set>
 #include <vector>
+#include <limits>
 
 #include "catch.hpp"
 
@@ -41,8 +39,6 @@ TEST_CASE("benchmark prd_part operations") {
   };
   std::vector<prd_part> parts(10000000);
   std::generate(parts.begin(), parts.end(), create_part);
-
-  auto get_weight = [](const prd_part &a_part) { return a_part.weight; };
 
   auto add_weight = [](float lhs, const prd_part &part) {
     return lhs + part.weight;

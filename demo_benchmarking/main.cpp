@@ -40,7 +40,7 @@ TEST_CASE("benchmark prd_part operations") {
   std::vector<prd_part> parts(10000000);
   std::generate(parts.begin(), parts.end(), create_part);
 
-  auto add_weight = [](float lhs, const prd_part &part) {
+  auto add_weight = [](double lhs, const prd_part &part) {
     return lhs + part.weight;
   };
 
@@ -51,10 +51,10 @@ TEST_CASE("benchmark prd_part operations") {
   };
 
   BENCHMARK("Calculate center of gravity using loop") {
-    float total_weight = 0.0;
-    float cog_x = 0.0;
-    float cog_y = 0.0;
-    float cog_z = 0.0;
+    double total_weight = 0.0;
+    double cog_x = 0.0;
+    double cog_y = 0.0;
+    double cog_z = 0.0;
 
     for (int i = 0; i < parts.size(); ++i) {
       cog_x += parts[i].weight*parts[i].cog.x;
@@ -76,8 +76,8 @@ TEST_CASE("benchmark prd_part operations") {
   };
 
   BENCHMARK("Calculate min and max weight using loop") {
-    float min_weight = -std::numeric_limits<float>::max();
-    float max_weight = -std::numeric_limits<float>::min();
+    double min_weight = -std::numeric_limits<double>::max();
+    double max_weight = -std::numeric_limits<double>::min();
 
     for (int i = 0; i < parts.size(); ++i) {
       if (parts[i].weight < min_weight) {
